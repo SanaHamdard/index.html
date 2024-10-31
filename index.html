@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #2c3e50;
+        }
+
+        .container {
+            border: 1px solid #ccc;
+            padding: 18px;
+            border-radius: 16px;
+            background-color: #333;
+            box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .input {
+            width: 460px;
+            border: none;
+            padding: 24px;
+            margin-bottom: 20px;
+            background-color: #000;
+            color: #fff;
+            font-size: 40px;
+            text-align: right;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            height: 60px;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+            color: #333;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #d1d1d1;
+        }
+
+        .equal {
+            background-color: #f39c12;
+            color: #fff;
+        }
+
+        .operator {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .operator:hover {
+            background-color: #444;
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+
+            margin-top: 12px;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input class="input" type="text" placeholder="0" id="input">
+        <div class="button-grid" id="buttons">
+            <button class="operator">AC</button>
+            <button class="operator">DEL</button>
+            <button class="operator">%</button>
+            <button class="operator">/</button>
+
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">*</button>
+
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button class="operator">-</button>
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button class="operator">+</button>
+
+            <button>00</button>
+            <button>0</button>
+            <button class="operator">.</button>
+            <button class="equal">=</button>
+        </div>
+        <footer>This project was coded by Sana Hamdard and is on <a
+                href="https://github.com/SanaHamdard/calculator/blob/main/calculator.html">GitHub</a> and hosted on <a
+                href="https://urcalculator.netlify.app/">Netlify</a>
+        </footer>
+    </div>
+
+    <script>
+        let input = document.getElementById('input');
+        let buttons = document.querySelectorAll('button');
+        let string = "";
+        let arrays = Array.from(buttons);
+
+        arrays.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (e.target.innerHTML === '=') {
+                    try {
+                        string = eval(string);
+                        input.value = string;
+                    } catch {
+                        input.value = "Error";
+                    }
+                } else if (e.target.innerHTML === 'AC') {
+                    string = "";
+                    input.value = string;
+                } else if (e.target.innerHTML === 'DEL') {
+                    string = string.substring(0, string.length - 1);
+                    input.value = string;
+                } else {
+                    string += e.target.innerHTML;
+                    input.value = string;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
